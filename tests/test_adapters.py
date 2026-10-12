@@ -2,6 +2,7 @@
 
 import subprocess
 from unittest.mock import MagicMock, patch
+
 import pytest
 
 from afsar.adapters.agy import AgyAdapter
@@ -73,4 +74,3 @@ def test_claude_adapter_authentication_error() -> None:
     with patch("subprocess.run", return_value=mock_res):
         with pytest.raises(AuthenticationError, match="claude auth login"):
             adapter.ask("Hello")
-

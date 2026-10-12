@@ -1,9 +1,10 @@
 """Core session management and procedural API for afsar."""
 
-from collections.abc import Sequence
 import os
 import shutil
+from collections.abc import Sequence
 from typing import Any
+
 from afsar.adapters.base import BaseAdapter
 from afsar.exceptions import (
     ModelNotFoundError,
@@ -142,7 +143,9 @@ def ask(
 ) -> Any:
     """Send a prompt to the configured LLM and return the answer."""
     if _active_adapter is None:
-        raise NotSetupError("afsar is not configured. Please call afsar.setup() before afsar.ask().")
+        raise NotSetupError(
+            "afsar is not configured. Please call afsar.setup() before afsar.ask()."
+        )
 
     if format not in {"text", "json"}:
         raise ValueError(f"Invalid format '{format}'. Supported formats: 'text', 'json'.")

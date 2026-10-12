@@ -2,9 +2,9 @@
 
 import json
 import os
-from typing import Any
 import urllib.error
 import urllib.request
+from typing import Any
 
 from afsar.adapters.base import BaseAdapter
 from afsar.exceptions import ExecutionError

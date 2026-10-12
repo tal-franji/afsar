@@ -1,15 +1,15 @@
 """Schema extraction and validation helpers without mandatory dependencies."""
 
-from collections.abc import Sequence
 import dataclasses
 import json
+from collections.abc import Sequence
 from typing import Any, cast, get_type_hints
 
 
 def is_pydantic_model(cls: Any) -> bool:
     """Check if cls is a Pydantic model class without importing pydantic at module load."""
-    return (
-        isinstance(cls, type) and (hasattr(cls, "model_json_schema") or hasattr(cls, "parse_raw"))
+    return isinstance(cls, type) and (
+        hasattr(cls, "model_json_schema") or hasattr(cls, "parse_raw")
     )
 
 

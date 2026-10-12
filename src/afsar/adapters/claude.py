@@ -79,7 +79,13 @@ class ClaudeAdapter(BaseAdapter):
         cmd = self._build_cmd(prompt, format, schema, thinking)
 
         try:
-            res = subprocess.run(cmd, capture_output=True, text=True, check=False)
+            res = subprocess.run(
+                cmd,
+                stdin=subprocess.DEVNULL,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
         except Exception as e:
             raise ExecutionError(f"Failed to execute claude CLI: {e}") from e
 

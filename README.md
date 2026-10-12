@@ -6,11 +6,6 @@
 
 A simple, student-friendly procedural Python library providing a uniform interface to LLMs. `afsar` prioritizes installed local coding agents (`claude-code`, `antigravity`) so students can use their existing agents and tools, and smoothly falls back to remote cloud APIs (`Gemini`, `OpenAI`).
 
-- **Zero Mandatory Dependencies**: Built entirely with standard library tools (`dataclasses`, `urllib`). No heavy frameworks or Pydantic required.
-- **Pure Procedural API**: Beginner-friendly `afsar.setup()` and `afsar.ask()`.
-- **Built-in Local Tools**: Local agents default to `tools=["python", "files"]`, enabling students to write programs that ask LLMs to generate, run, and test code.
-- **Typed Schemas**: Deserializes directly into Python's built-in `@dataclass` without third-party validation libraries.
-
 ---
 
 ## Installation
