@@ -1,0 +1,44 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.0
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: check-ops-plain-ascii
+        name: check-ops-plain-ascii
+        entry: >-
+          python3 -c "import sys, pathlib; errors = [f'{p}:{i+1} non-ascii char {c!r}' for p in sys.argv[1:] for i, line in enumerate(pathlib.Path(p).read_text(encoding='utf-8', errors='replace').splitlines()) for c in line if ord(c) > 127]; sys.exit('\n'.join(errors)) if errors else sys.exit(0)"
+        language: system
+        files: (^|/)ops/.*\.(sh|py|bash|zsh)$|(^|/)ops/deploy$
+
+      - id: code-limits
+        name: check-module-and-function-limits
+        entry: /Users/talfranji/venv/afsar/bin/python ops/check_code_limits.py --max-module-lines 600 --max-function-lines 220
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: xenon
+        name: xenon
+        entry: /Users/talfranji/venv/afsar/bin/xenon --no-assert -b C -m C -a A src ops -i "tests"
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: mypy
+        name: mypy
+        entry: /Users/talfranji/venv/afsar/bin/mypy src ops tests
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: pytest
+        name: pytest
+        entry: /Users/talfranji/venv/afsar/bin/pytest -v
+        language: system
+        types: [python]
+        pass_filenames: false

@@ -55,8 +55,7 @@ def setup(
     api_key: str | None = None,
     tools: list[str] | None = ("python", "files"),
     provider: str | None = None,
-) -> None:
-    ...
+) -> None: ...
 ```
 
 #### Behavior & Rules:
@@ -89,8 +88,7 @@ def ask(
     schema: type[Any] | None = None,
     temperature: float | None = None,
     thinking: bool | None = None,
-) -> str | Any:
-    ...
+) -> str | Any: ...
 ```
 
 #### Parameters:
@@ -142,8 +140,7 @@ class BaseAdapter(abc.ABC):
         schema: type[BaseModel] | None,
         temperature: float | None,
         thinking: bool | None,
-    ) -> str | BaseModel:
-        ...
+    ) -> str | BaseModel: ...
 ```
 
 ### 4.1 Claude Code Adapter (`ClaudeAdapter`)
