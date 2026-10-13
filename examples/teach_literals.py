@@ -22,7 +22,7 @@ Requirements:
 - Ask the student to write only the literal itself.
 - Do NOT include the answer or spoilers. Output ONLY the question."""
 
-    return str(afsar.ask(prompt, temperature=0.9))
+    return afsar.ask(prompt, temperature=0.9)
 
 
 def evaluate_answer(question: str, user_answer: str) -> str:
@@ -48,7 +48,7 @@ Please test and evaluate the student's answer:
 4. If incorrect, explain the mistake and show the correct literal.
 5. If correct, briefly explain how Python interprets it."""
 
-    return str(afsar.ask(eval_prompt))
+    return afsar.ask(eval_prompt)
 
 
 def main() -> None:

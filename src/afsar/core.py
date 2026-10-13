@@ -3,7 +3,7 @@
 import os
 import shutil
 from collections.abc import Sequence
-from typing import Any
+from typing import Any, TypeVar, overload
 
 from afsar.adapters.base import BaseAdapter
 from afsar.exceptions import (
@@ -11,6 +11,8 @@ from afsar.exceptions import (
     NotSetupError,
     UnsupportedFeatureError,
 )
+
+T = TypeVar("T")
 
 _active_adapter: BaseAdapter | None = None
 
@@ -131,6 +133,39 @@ def setup(
         )
 
     _active_adapter = _create_adapter(detected, model, api_key, tools)
+
+
+@overload
+def ask(
+    prompt: str,
+    *,
+    format: str = "text",
+    schema: None = None,
+    temperature: float | None = None,
+    thinking: bool | None = None,
+) -> str: ...
+
+
+@overload
+def ask(
+    prompt: str,
+    *,
+    format: str = "text",
+    schema: type[T],
+    temperature: float | None = None,
+    thinking: bool | None = None,
+) -> T: ...
+
+
+@overload
+def ask(
+    prompt: str,
+    *,
+    format: str = "text",
+    schema: Any = None,
+    temperature: float | None = None,
+    thinking: bool | None = None,
+) -> Any: ...
 
 
 def ask(
