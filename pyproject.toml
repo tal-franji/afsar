@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "afsar"
-version = "0.1.0"
+version = "1.0"
 description = "LLM API library for students utilizing local agents or remote APIs"
 readme = "README.md"
 requires-python = ">=3.10"
