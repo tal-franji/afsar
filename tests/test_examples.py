@@ -2,6 +2,8 @@
 
 from unittest.mock import patch
 
+from examples.inspect_literals import inspect_literals
+from examples.inspect_literals import main as inspect_literals_main
 from examples.teach_literals import (
     ask_quiz_question,
     evaluate_answer,
@@ -47,3 +49,26 @@ def test_main_quiz_flow() -> None:
     ):
         main()
         assert mock_ask.call_count == 2
+
+
+def test_inspect_literals_calls_ask() -> None:
+    """inspect_literals should call afsar.ask with inspection prompt."""
+    with patch("afsar.ask", return_value="Good coverage, few bugs.") as mock_ask:
+        report = inspect_literals()
+        assert report == "Good coverage, few bugs."
+        mock_ask.assert_called_once()
+        prompt = mock_ask.call_args[0][0]
+        assert "teach_literals.py" in prompt
+        assert "5 times" in prompt
+        assert "coverage" in prompt
+
+
+def test_inspect_literals_main_flow() -> None:
+    """inspect_literals_main should execute setup and print report."""
+    with (
+        patch("afsar.setup") as mock_setup,
+        patch("afsar.ask", return_value="Inspection complete") as mock_ask,
+    ):
+        inspect_literals_main()
+        mock_setup.assert_called_once()
+        mock_ask.assert_called_once()

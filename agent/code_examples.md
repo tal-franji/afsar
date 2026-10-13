@@ -17,3 +17,6 @@ print(value)
 ```
 
 The prompt for Call 2 may also request to explain the errors of the student if any.
+
+## inspect_literals
+This example uses afsar to run `examples/teach_literals.py` 5 times (providing sample student answers), inspects the source code, and reports on whether the program does a good job covering the topic 'literals' and whether it has any bugs, issues, or pedagogical limitations.
